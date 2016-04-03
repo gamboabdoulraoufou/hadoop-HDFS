@@ -1,14 +1,10 @@
-# hadoop-HDFS
-
-## hadoop-Spark RDD
+## hadoop-HDFS
 
 This post will cover the following points:
-- what is RDD  
-- how to manipulate RDD using _pyspark API_ (mapreduce example)
-- Some RDD actions
-- Caching data 
-- Shared Variables
-- Accumulator
+- Basic HDFS architecture, design goal and performance envelope 
+- read write process
+- tuning consideration, perfomance, impact of tuning and impact of robusteness
+- moving data to from HDFS
 
 
 **What is RDD (Resilient Distributed Dataset)**  
