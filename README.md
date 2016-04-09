@@ -4,7 +4,8 @@ This post will cover the following points:
 - Basic HDFS architecture, design goal and performance envelope 
 - Read Write process
 - Tuning consideration, perfomance, impact of tuning and impact of robusteness
-- Moving data to from HDFS
+- HDFS access API
+- Command
 
 **HDFS concepts**  
 Hadoop File System was developed using distributed file system design. It is run on commodity hardware. Unlike other distributed systems, HDFS is highly faulttolerant and designed using low-cost hardware.  
@@ -26,29 +27,44 @@ _Read process_
 - Client gets DataNode list from NameNode
 - Read from replicat closest to reader
 
-_Write process_ 
+_Write process_   
 - client request to create file
 - NameNode contacted one the bloc of data is accumulated
 - NameNode response with a list of DataNodes
 - The first DataNode receives data, writes to local and forwards to second DataNode
 - The NameNode commits files creation
 
-**HDFS Tuning**
+**HDFS Tuning**  
 _Parameters_
+Parameters can be changed from hdfs-site.xml file or GUI interface for some commercial distribution.
 _Bloc size_
-_NameNode, DataNode, system/dfs parameters_
+By default, block size is 64MB. Can be changed based on workloads. The parameter that this changes is dfs.blocksize or dfs.block.size.
+_Replication_
+By default, the replication is set to 3. The parameters that this change is dfs.replication.
+_Other parameters_
+Change number of threads per Node, maximum number of block by file.
 
+**HDFS access**
+- Command line invoked via bin/hdfs
+- Native Java API
+- C API
+- WebHDFS Rest API: HTTP Get, Put, Delete operations
 
-**What is RDD (Resilient Distributed Dataset)**  
-RDD is the data container, the way in Spark to store data like variable or object in programming.
-Data can be read from local text file, HDFS or other source. 
-  
-Caracteristiques:
-- Immutable: you cannot change just a section of RDD. But every time you transform one RDD, you create a new one.  
-- Distributed: partition of data are divided accross machine
-- Resilient: for every point in your calculations, Spark knows which are the partitions needed to recreate the partition in case it gets lost. And if that happens, then spark automatically figures out where it can start from to recompute what's the minimum amount of processing needed to recover the lost partition
-
-**RDD manipulation**  
-Go to your shell console and tape this command
+** Command**
 ```sh
-pyspark
+# Create test directory
+hadoop fs -mkdir /user/test
+
+# Look at the content of user folder
+hadoop fs -ls /user
+
+# Create file in local disk
+echo "Hello world" > sample.txt
+
+# Copy file into HDFS
+hadoop fs -put sample.txt /user/test
+
+hadoop fsck
+hadoop fsadmin -report
+
+```
