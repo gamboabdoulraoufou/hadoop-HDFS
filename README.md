@@ -13,20 +13,20 @@ HDFS holds very large amount of data and provides easier access. To store such h
 
 ![java default](https://raw.github.com/mbonaci/mbo-spark/master/resources/java-default.PNG)
 
-***NameNode***  
+_NameNode_  
 A master server that manages the file system namespace and regulates access to files by client.
 
-***DataNode***  
+_DataNode_  
 - Manage storage
 - Serving read/write requests from client
 - Bloc creation, deletion, replication based on instruction from NameNode
 
 **Read/Write process**  
-***Read process***
+_Read process_
 - Client gets DataNode list from NameNode
 - Read from replicat closest to reader
 
-***Write process*** 
+_Write process_ 
 - client request to create file
 - NameNode contacted one the bloc of data is accumulated
 - NameNode response with a list of DataNodes
@@ -34,9 +34,9 @@ A master server that manages the file system namespace and regulates access to f
 - The NameNode commits files creation
 
 **HDFS Tuning**
-***Parameters***
-***Bloc size***
-***NameNode, DataNode, system/dfs parameters***
+_Parameters_
+_Bloc size_
+_NameNode, DataNode, system/dfs parameters_
 
 
 **What is RDD (Resilient Distributed Dataset)**  
