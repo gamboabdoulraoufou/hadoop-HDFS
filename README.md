@@ -82,3 +82,15 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
   </property>
 
 ```
+
+** Add user **
+```
+# Create user home directory in HDFS
+# For that from the admin user, create a directory structure.
+hadoop dfs –mkdir /user/abdoul/
+
+# Change the ownership of user home directory in HDFS
+# The ownership of the newly created directory structure is with superuser.With this new user will not be able to run mapreduce programs. So change the ownership of newly created directory in HDFS to the new user.
+hadoop dfs –chown –R abdoul:abdoul /user/abdoul
+
+```
