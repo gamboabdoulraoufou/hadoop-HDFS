@@ -76,10 +76,11 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
 
 # Enable ACL by adding the content bellow
 <property>
-    <name> dfs.namenode.acls.enabled</name>
-    <value>true</value>
-    <description>use posix to secure file and repository access</description>
-  </property>
+  <name>dfs.namenode.acls.enabled</name>
+  <value>true</value>
+  <description>use posix to secure file and repository access</description>
+</property>
+
 
 ```
 
