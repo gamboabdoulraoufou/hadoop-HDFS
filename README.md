@@ -85,6 +85,9 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
 
 **Add user**
 ```sh
+# Log to hadoop user
+sudo su - hadoop
+
 # Create user
 sudo adduser abdoul # set passwork 1234
 
@@ -93,5 +96,8 @@ hadoop dfs –mkdir /user/abdoul/
 
 # Change the ownership of user home directory in HDFS
 hadoop dfs –chown –R abdoul:abdoul /user/abdoul
+
+# Change ACL of user folder
+hadoop fs -chmod -R 750 /user/abdoul
 
 ```
