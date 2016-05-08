@@ -50,7 +50,7 @@ Change number of threads per Node, maximum number of block by file.
 - C API
 - WebHDFS Rest API: HTTP Get, Put, Delete operations
 
-** Command**
+**Command**
 ```sh
 # Create test directory
 hadoop fs -mkdir /user/test
@@ -69,7 +69,7 @@ hadoop fsadmin -report
 
 ```
 
-** HDFS Security **
+**HDFS Security**
 ```sh
 # Edit hdfs-site.xml file
 sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
@@ -83,8 +83,8 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
 
 ```
 
-** Add user **
-```
+**Add user**
+```sh
 # Create user home directory in HDFS
 hadoop dfs –mkdir /user/abdoul/
 
