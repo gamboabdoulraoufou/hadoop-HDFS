@@ -68,3 +68,17 @@ hadoop fsck
 hadoop fsadmin -report
 
 ```
+
+** HDFS Security **
+```sh
+# Edit hdfs-site.xml file
+sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
+
+# Enable ACL by adding the content bellow
+<property>
+    <name> dfs.namenode.acls.enabled</name>
+    <value>true</value>
+    <description>use posix to secure file and repository access</description>
+  </property>
+
+```
