@@ -85,6 +85,9 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
 
 **Add user**
 ```sh
+# Create user
+sudo adduser abdoul # set passwork 1234
+
 # Create user home directory in HDFS
 hadoop dfs –mkdir /user/abdoul/
 
