@@ -69,7 +69,9 @@ hadoop fsadmin -report
 
 ```
 
-**HDFS Security**
+**HDFS Security: Enabling ACLs**
+HDFS supports POSIX Access Control Lists (ACLs), as well as the traditional POSIX permissions model already supported. ACLs control access of HDFS files by providing a way to set different permissions for specific named users or named groups.
+
 ```sh
 # Edit hdfs-site.xml file
 sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
@@ -81,7 +83,54 @@ sudo nano /home/hadoop/hadoop-install/share/hadoop/templates/conf/hdfs-site.xml
   <description>use posix to secure file and repository access</description>
 </property>
 
+```
 
+To set and get file access control lists (ACLs), use the file system shell commands, setfacl and getfacl.
+
+getfacl
+```sh
+hdfs dfs -getfacl [-R] <path>
+
+<!-- COMMAND OPTIONS
+<path>: Path to the file or directory for which ACLs should be listed.
+-R: Use this option to recursively list ACLs for all files and directories.
+-->
+```
+
+Examples:
+```sh
+<!-- To list all ACLs for the file located at /user/hdfs/file -->
+hdfs dfs -getfacl /user/hdfs/file
+```
+
+```sh
+<!-- To recursively list ACLs for /user/hdfs/file -->
+hdfs dfs -getfacl -R /user/hdfs/file
+setfacl
+hdfs dfs -setfacl [-R] [-b|-k -m|-x <acl_spec> <path>]|[--set <acl_spec> <path>]
+```
+
+<!-- COMMAND OPTIONS
+<path>: Path to the file or directory for which ACLs should be set.
+-R: Use this option to recursively list ACLs for all files and directories.
+-b: Revoke all permissions except the base ACLs for user, groups and others.
+-k: Remove the default ACL.
+-m: Add new permissions to the ACL with this option. Does not affect existing permissions.
+-x: Remove only the ACL specified.
+<acl_spec>: Comma-separated list of ACL permissions.
+--set: Use this option to completely replace the existing ACL for the path specified. 
+       Previous ACL entries will no longer apply.
+-->
+Examples:
+```sh
+<!-- To give user ben read & write permission over /user/hdfs/file -->
+hdfs dfs -setfacl -m user:ben:rw- /user/hdfs/file
+
+<!-- To remove user alice's ACL entry for /user/hdfs/file -->
+hdfs dfs -setfacl -x user:alice /user/hdfs/file
+
+<!-- To give user hadoop read & write access, and group or others read-only access -->
+hdfs dfs -setfacl --set user::rw-,user:hadoop:rw-,group::r--,other::r-- /user/hdfs/file
 ```
 
 **Add user**
